@@ -1,9 +1,7 @@
 import { ConfigGeneration } from "./Configuration";
 
 export type SettingsConfig = {
-  esCups: boolean;
-  esDNI: boolean;
-  esIBAN: boolean;
+  [K in keyof typeof ConfigGeneration]: boolean;
 };
 
 export const DEFAULT_SETTINGS: Partial<SettingsConfig> = {};
