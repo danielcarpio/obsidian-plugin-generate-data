@@ -3,17 +3,18 @@ import { DataGeneratorModal } from "src/ui/data-generator-modal";
 import { DASHBOARD_VIEW_TYPE, DashboardView } from "src/ui/dashboard-view";
 import { ConfigGeneration } from "src/config/Configuration";
 import { DEFAULT_SETTINGS, SettingsConfig } from "src/config/Settings";
-import { SettingTab } from "src/config/SettingTab";
+import { DataGeneratorSettingTab } from "src/config/DataGeneratorSettingTab";
 
 export default class DataGenerator extends Plugin {
   settings: SettingsConfig;
   private viewRegistered = false;
+  private commandRegistered = false;
 
   async onload() {
     await this.loadSettings();
-    this.addSettingTab(new SettingTab(this.app, this));
+    this.addSettingTab(new DataGeneratorSettingTab(this.app, this));
 
-    this.createCommands();
+    if (!this.commandRegistered) this.createCommands();
     if (!this.viewRegistered) this.registerDashboardView();
   }
 
@@ -27,8 +28,6 @@ export default class DataGenerator extends Plugin {
 
   private createCommands() {
     for (const configKey of Object.keys(ConfigGeneration)) {
-      if (!this.settings[configKey as keyof SettingsConfig]) return;
-
       const { id, name, generateFunction } = ConfigGeneration[configKey];
       this.addCommand({
         id,
@@ -38,6 +37,7 @@ export default class DataGenerator extends Plugin {
         },
       });
     }
+    this.commandRegistered = true;
   }
 
   private registerDashboardView() {

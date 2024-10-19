@@ -1,6 +1,6 @@
 import { generateSpanishCUPS } from "src/generator/spanish_cups";
-import { generateSpanishDNI } from "src/generator/spanish_dni";
-import { generateSpanishIBAN } from "src/generator/spanish_iban";
+import * as personalInformation from "src/generator/personal_information";
+import { generateIBAN } from "src/generator/iban";
 
 type ConfigData = {
   id: string;
@@ -11,25 +11,60 @@ type ConfigData = {
 };
 
 export const ConfigGeneration = <Record<string, ConfigData>>{
+  firstName: {
+    id: "generate-first-name",
+    name: "First name",
+    description: "Generate first name",
+    generateFunction: personalInformation.generateFirstName,
+    activeByDefault: true,
+  },
+  lastName: {
+    id: "generate-last-name",
+    name: "Last name",
+    description: "Generate last name",
+    generateFunction: personalInformation.generateLastName,
+    activeByDefault: true,
+  },
+  jobTitle: {
+    id: "generate-job-title",
+    name: "Job title",
+    description: "Generate job title",
+    generateFunction: personalInformation.generateJobTitle,
+    activeByDefault: true,
+  },
+  sex: {
+    id: "generate-sex",
+    name: "Sex",
+    description: "Generate sex",
+    generateFunction: personalInformation.generateSex,
+    activeByDefault: true,
+  },
+  zodiacSign: {
+    id: "generate-zodiac-sign",
+    name: "Zodiac sign",
+    description: "Generate zodiac sign",
+    generateFunction: personalInformation.generateZodiacSign,
+    activeByDefault: false,
+  },
   esCups: {
     id: "generate-spanish-cups",
     name: "Spanish Cups",
-    description: "Spanish Cups",
+    description: "Generate spanish CUPS",
     generateFunction: generateSpanishCUPS,
-    activeByDefault: true,
+    activeByDefault: false,
   },
   esDNI: {
     id: "generate-spanish-dni",
     name: "Spanish DNI",
-    description: "Spanish DNI",
-    generateFunction: generateSpanishDNI,
-    activeByDefault: true,
+    description: "Generate spanish id number",
+    generateFunction: personalInformation.generateSpanishDNI,
+    activeByDefault: false,
   },
-  esIBAN: {
-    id: "generate-spanish-iban",
-    name: "Spanish IBAN",
-    description: "Spanish IBAN",
-    generateFunction: generateSpanishIBAN,
+  iban: {
+    id: "generate-iban",
+    name: "IBAN",
+    description: "Generate IBAN",
+    generateFunction: generateIBAN,
     activeByDefault: false,
   },
 };
