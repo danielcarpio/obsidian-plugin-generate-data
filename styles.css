@@ -1,0 +1,23 @@
+.modal-value.text-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.modal-value.text-value {
+  margin-right: 20px; /* Aumentar el espacio entre el DNI y el botón */
+  font-weight: bold;
+}
+
+.modal-value.copy-button {
+  cursor: pointer;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.modal-value.copy-button:hover {
+  background-color: #005fa3;
+}
