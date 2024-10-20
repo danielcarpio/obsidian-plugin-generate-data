@@ -8,13 +8,13 @@ import { DataGeneratorSettingTab } from "src/config/DataGeneratorSettingTab";
 export default class DataGenerator extends Plugin {
   settings: SettingsConfig;
   private viewRegistered = false;
-  private commandRegistered = false;
+  private commandsRegistered: Array<String> = [];
 
   async onload() {
     await this.loadSettings();
     this.addSettingTab(new DataGeneratorSettingTab(this.app, this));
 
-    if (!this.commandRegistered) this.createCommands();
+    this.createCommands();
     if (!this.viewRegistered) this.registerDashboardView();
   }
 
@@ -29,21 +29,35 @@ export default class DataGenerator extends Plugin {
   private createCommands() {
     for (const configKey of Object.keys(ConfigGeneration)) {
       const { id, name, generateFunction } = ConfigGeneration[configKey];
-      this.addCommand({
-        id,
-        name: `Generate ${name}`,
-        callback: () => {
-          new DataGeneratorModal(this.app, name, generateFunction()).open();
-        },
-      });
+      const isActiveInSettings = this.settings[configKey];
+      const isRegistered = this.commandsRegistered.contains(id);
+
+      if (!isRegistered && isActiveInSettings) {
+        this.addCommand({
+          id,
+          name: `Generate ${name}`,
+          callback: () => {
+            new DataGeneratorModal(this.app, name, generateFunction()).open();
+          },
+        });
+        this.commandsRegistered.push(id);
+        continue;
+      }
+
+      if (isRegistered && !isActiveInSettings) {
+        this.removeCommand(id);
+        const index = this.commandsRegistered.indexOf(id);
+        if (index !== -1) {
+          this.commandsRegistered.splice(index, 1);
+        }
+      }
     }
-    this.commandRegistered = true;
   }
 
   private registerDashboardView() {
     this.registerView(
       DASHBOARD_VIEW_TYPE,
-      (leaf) => new DashboardView(leaf, this),
+      (leaf) => new DashboardView(leaf, this)
     );
     this.viewRegistered = true;
     const ribbonIconEl = this.addRibbonIcon("dice", "DataGenerator", () => {

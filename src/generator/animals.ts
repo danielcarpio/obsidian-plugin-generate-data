@@ -5,5 +5,5 @@ export const generateAnimalType = () => {
 };
 
 export const generateAnimal = () => {
-  return faker.animal[generateAnimalType() as keyof AnimalModule];
+  return faker.animal[generateAnimalType() as keyof AnimalModule]();
 };
