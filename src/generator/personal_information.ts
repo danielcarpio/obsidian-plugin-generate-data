@@ -32,13 +32,13 @@ export const generateEmail = () => {
 };
 
 export const generatePassword = () => {
-  faker.internet.password();
+  return faker.internet.password();
 };
 
 export const generateCity = () => {
-  faker.location.city();
+  return faker.location.city();
 };
 
 export const generateCountry = () => {
-  faker.location.country();
+  return faker.location.country();
 };
