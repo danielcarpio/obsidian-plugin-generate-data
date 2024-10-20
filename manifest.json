@@ -3,8 +3,8 @@
   "name": "Data generator",
   "version": "1.0.0",
   "minAppVersion": "0.15.0",
-  "description": "Generate useful data for development",
+  "description": "Generate random data for examples or development. It can generate names, lastnames, jobs, emails, animals, credit cards, colors, emojis...",
   "author": "danielcarpio",
   "authorUrl": "https://github.com/danielcarpio",
-  "isDesktopOnly": false
+  "isDesktopOnly": true
 }

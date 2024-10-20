@@ -2,6 +2,8 @@
 
 Plugin for Obsidian which generates random data. It can be used for give examples or for testing purposes.
 
+Generate random data for examples or development. It can generate names, lastnames, jobs, emails, animals, credit cards, colors, emojis...
+
 This plugin is made to be used for Obsidian (https://obsidian.md).
 
 ## Developer documentation
