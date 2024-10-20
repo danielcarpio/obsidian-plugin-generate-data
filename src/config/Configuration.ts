@@ -63,6 +63,20 @@ export const ConfigGeneration = <Record<string, ConfigData>>{
     generateFunction: personal_information.generateZodiacSign,
     activeByDefault: false,
   },
+  city: {
+    id: "generate-city",
+    name: "City",
+    description: "Generate city",
+    generateFunction: personal_information.generateCity,
+    activeByDefault: true,
+  },
+  country: {
+    id: "generate-country",
+    name: "Country",
+    description: "Generate country",
+    generateFunction: personal_information.generateCountry,
+    activeByDefault: true,
+  },
   esCups: {
     id: "generate-spanish-cups",
     name: "Spanish Cups",

@@ -34,3 +34,11 @@ export const generateEmail = () => {
 export const generatePassword = () => {
   faker.internet.password();
 };
+
+export const generateCity = () => {
+  faker.location.city();
+};
+
+export const generateCountry = () => {
+  faker.location.country();
+};
