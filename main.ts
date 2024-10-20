@@ -43,7 +43,7 @@ export default class DataGenerator extends Plugin {
   private registerDashboardView() {
     this.registerView(
       DASHBOARD_VIEW_TYPE,
-      (leaf) => new DashboardView(leaf, this)
+      (leaf) => new DashboardView(leaf, this),
     );
     this.viewRegistered = true;
     const ribbonIconEl = this.addRibbonIcon("dice", "DataGenerator", () => {

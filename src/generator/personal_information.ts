@@ -26,3 +26,11 @@ export const generateSpanishDNI = () => {
   const dniLetter = letters[dniNumber % 23];
   return dniNumber.toString().padStart(8, "0") + dniLetter;
 };
+
+export const generateEmail = () => {
+  return faker.internet.email();
+};
+
+export const generatePassword = () => {
+  faker.internet.password();
+};
