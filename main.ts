@@ -9,10 +9,14 @@ export default class DataGenerator extends Plugin {
   settings: SettingsConfig;
   private viewRegistered = false;
   private commandsRegistered: Array<String> = [];
+  private settingsAdded = false;
 
   async onload() {
     await this.loadSettings();
-    this.addSettingTab(new DataGeneratorSettingTab(this.app, this));
+    if(!this.settingsAdded) {
+      this.addSettingTab(new DataGeneratorSettingTab(this.app, this));
+      this.settingsAdded = true;
+    }
 
     this.createCommands();
     if (!this.viewRegistered) this.registerDashboardView();
